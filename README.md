@@ -1,9 +1,10 @@
 # Usage
 
-Change the folder permission to make sure that the container is able to access the directory:
+# Change the folder permission to make sure that the container is able to access the directory:
 ```
-$ sudo chmod -R 777 addons
-$ sudo chmod -R 777 etc
+#$ sudo chmod -R 777 addons
+#$ sudo chmod -R 777 etc
+$ sudo chown -R ${USER}:${USER} addons etc
 ```
 
 Start the container:
