@@ -1,11 +1,14 @@
-version: '2'
+version: '3'
 services:
   db:
-    image: postgres:9.5
+    image: postgres:10
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
     restart: unless-stopped             # run as a service
 
   odoo12:
@@ -18,6 +21,11 @@ services:
     command: -- --dev=reload
 #    command: odoo scaffold /mnt/extra-addons/test_module
     volumes:
+      - ./odoo-web-data:/var/lib/odoo
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: unless-stopped             # run as a service
+    
+volumes:
+  odoo-web-data:
+  odoo-db-data:
